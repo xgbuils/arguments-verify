@@ -4,7 +4,8 @@
   "description": "arguments verifier",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "lint": "eslint ./**/*.js; exit 0"
   },
   "keywords": [
     "verify",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "eslint": "^2.11.0",
     "mocha": "^2.5.3",
     "sinon": "^1.17.4"
   }

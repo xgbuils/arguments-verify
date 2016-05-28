@@ -13,7 +13,7 @@ var ARRAY = [1, 2, 3]
 var GENERIC_ERROR = new Error('muahaha')
 var FUNCTION = function () {}
 
-function fnTestCreator(rules, cb) {
+function fnTestCreator (rules, cb) {
     return function () {
         return argumentsVerify(rules, arguments, cb)
     }
@@ -174,7 +174,7 @@ describe('argumentsVerify', function () {
         it('callback is called once when some argument is invalid', function () {
             var RULES = [
                 ['Number'],
-                [TypeError],
+                [TypeError]
             ]
             var foo = fnTestCreator(RULES, cb)
             foo(PRIMITIVE_NUMBER, GENERIC_ERROR)
@@ -283,7 +283,7 @@ describe('argumentsVerify', function () {
             it('is false when some argument is invalid', function () {
                 var RULES = [
                     ['Number'],
-                    [TypeError],
+                    [TypeError]
                 ]
                 var foo = fnTestCreator(RULES, cb)
                 foo(PRIMITIVE_NUMBER, GENERIC_ERROR)

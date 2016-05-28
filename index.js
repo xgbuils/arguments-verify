@@ -20,7 +20,7 @@ function argumentsVerify (rules, argums, cb) {
 function transformRules (rules) {
     var result = []
     rules.every(function (rule, index) {
-        ruleIsArray = typeVerify(rule, ['Array'])
+        var ruleIsArray = typeVerify(rule, ['Array'])
         if (ruleIsArray) {
             result.push(rule)
         } else if (typeVerify(rule, ['Number'])) {
