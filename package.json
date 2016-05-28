@@ -13,8 +13,16 @@
     "arguments",
     "function"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xgbuils/arguments-verify.git"
+  },
   "author": "Xavier Garcia Buils <xgbuils@gmail.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xgbuils/arguments-verify/issues"
+  },
+  "homepage": "https://github.com/xgbuils/arguments-verify#readme",
   "dependencies": {
     "type-verify": "^0.3.0"
   },
