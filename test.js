@@ -13,9 +13,10 @@ var ARRAY = [1, 2, 3]
 var GENERIC_ERROR = new Error('muahaha')
 var FUNCTION = function () {}
 
-function fnTestCreator (rules, cb) {
+function fnTestCreator (rules, cb, name) {
+    var context = this
     return function () {
-        return argumentsVerify(rules, arguments, cb)
+        return argumentsVerify.call(context, rules, arguments, cb, name)
     }
 }
 
@@ -210,9 +211,11 @@ describe('argumentsVerify', function () {
                     ['Object'],
                     []
                 ]
-                var foo = fnTestCreator(RULES, cb)
+                var FN_NAME = 'foo'
+                var foo = fnTestCreator(RULES, cb, FN_NAME)
                 foo(ARRAY, OBJECT, PRIMITIVE_NUMBER)
                 expect(cb.args[0][0]).to.be.deep.equal({
+                    fnName: FN_NAME,
                     nth: 0,
                     value: ARRAY,
                     actual: {
@@ -232,9 +235,11 @@ describe('argumentsVerify', function () {
                     [Boolean],
                     ['Null']
                 ]
-                var foo = fnTestCreator(RULES, cb)
+                var FN_NAME = 'foo'
+                var foo = fnTestCreator(RULES, cb, FN_NAME)
                 foo(OBJECT_BOOLEAN, OBJECT_BOOLEAN)
                 expect(cb.args[0][0]).to.be.deep.equal({
+                    fnName: FN_NAME,
                     nth: 2,
                     value: undefined,
                     actual: {
@@ -253,9 +258,13 @@ describe('argumentsVerify', function () {
                     [Boolean],
                     ['Null']
                 ]
-                var foo = fnTestCreator(RULES, cb)
+                var FN_NAME = 'foo'
+                var foo = fnTestCreator.call({
+                    fnName: FN_NAME
+                }, RULES, cb)
                 foo(OBJECT_BOOLEAN, PRIMITIVE_BOOLEAN)
                 expect(cb.args[0][0]).to.be.deep.equal({
+                    fnName: FN_NAME,
                     nth: 1,
                     value: PRIMITIVE_BOOLEAN,
                     actual: {
