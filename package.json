@@ -1,0 +1,25 @@
+{
+  "name": "arguments-verify",
+  "version": "0.1.0",
+  "description": "arguments verifier",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "verify",
+    "validate",
+    "arguments",
+    "function"
+  ],
+  "author": "Xavier Garcia Buils <xgbuils@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "type-verify": "^0.3.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3",
+    "sinon": "^1.17.4"
+  }
+}
