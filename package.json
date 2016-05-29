@@ -1,6 +1,6 @@
 {
   "name": "arguments-verify",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "arguments verifier",
   "main": "index.js",
   "scripts": {

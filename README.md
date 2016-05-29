@@ -2,7 +2,7 @@
 function to check if arguments of function are valid
 
 ### Version
-0.1.0
+0.2.0
 
 ### Install
 ```
