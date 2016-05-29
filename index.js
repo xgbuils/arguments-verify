@@ -1,6 +1,7 @@
 var typeVerify = require('type-verify')
 
 function argumentsVerify (rules, argums, cb, fnName) {
+    cb = cb || this.handler
     fnName = fnName || this.fnName
     rules = transformRules(rules)
     var err = null

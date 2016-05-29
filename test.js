@@ -326,5 +326,29 @@ describe('argumentsVerify', function () {
                 })
             })
         })
+
+        describe('passing callback/error handler in context', function () {
+            it('', function () {
+                var RULES = [['Number']]
+                var FN_NAME = 'foo'
+                var foo = fnTestCreator.call({
+                    fnName: FN_NAME,
+                    handler: cb
+                }, RULES)
+                foo(OBJECT_STRING)
+                expect(cb.args[0][0]).to.be.deep.equal({
+                    fnName: FN_NAME,
+                    nth: 0,
+                    value: OBJECT_STRING,
+                    actual: {
+                        type: 'String'
+                    },
+                    expected: {
+                        type: ['Number'],
+                        instance: []
+                    }
+                })
+            })
+        })
     })
 })
