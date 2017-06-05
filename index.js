@@ -6,23 +6,34 @@ function argumentsVerify (rules, argums, cb, fnName) {
     rules = transformRules(rules)
     var err = null
     var ok = !rules.some(function (rule, index) {
-        if (typeVerify(rule, ['Object'])) {
+        if (Array.isArray(rule)) {
+            err = verify(argums, index, rule, fnName)
+        } else {
             var length = Math.min(argums.length, index + rule.times)
             for (; index < length && !err; ++index) {
-                err = typeVerify(argums[index], rule.rule, errorHandlerCreator(fnName, index))
+                err = verify(argums, index, rule.rule, fnName)
             }
-        } else {
-            err = typeVerify(argums[index], rule, errorHandlerCreator(fnName, index))
         }
         return err
     })
     return cb ? cb(err, ok) : ok
 }
 
+function verify (argums, index, rule, fnName) {
+    var err = typeVerify(argums[index], rule, errorHandlerCreator(fnName, index))
+    if (!err && index >= argums.length) {
+        err = {
+            fnName: fnName,
+            nth: index
+        }
+    }
+    return err
+}
+
 function transformRules (rules) {
     var result = []
     rules.every(function (rule, index) {
-        var ruleIsArray = typeVerify(rule, ['Array'])
+        var ruleIsArray = Array.isArray(rule)
         if (ruleIsArray) {
             result.push(rule)
         } else if (typeVerify(rule, ['Number'])) {

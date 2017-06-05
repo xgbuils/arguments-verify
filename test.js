@@ -13,6 +13,8 @@ var ARRAY = [1, 2, 3]
 var GENERIC_ERROR = new Error('muahaha')
 var FUNCTION = function () {}
 
+var FN_NAME = 'foo'
+
 function fnTestCreator (rules, cb, name) {
     var context = this
     return function () {
@@ -40,6 +42,16 @@ describe('argumentsVerify', function () {
             ]
             var foo = fnTestCreator(RULES)
             expect(foo(REGEXP, ARRAY, OBJECT_NUMBER, ARRAY, OBJECT_STRING)).to.be.equal(true)
+        })
+
+        it('it returns false if there are less arguments than requires', function () {
+            var RULES = [
+                ['RegExp'],
+                [],
+                []
+            ]
+            var foo = fnTestCreator(RULES)
+            expect(foo(REGEXP, ARRAY)).to.be.equal(false)
         })
 
         it('returns false when first argument is invalid', function () {
@@ -299,6 +311,23 @@ describe('argumentsVerify', function () {
                 expect(cb.args[0][1]).to.be.equal(false)
             })
         })
+
+        describe('less arguments than rules require', function () {
+            it('it is passed an error parameter just with fnName & nth properties', function () {
+                var RULES = [
+                    ['RegExp'],
+                    [],
+                    []
+                ]
+                var foo = fnTestCreator(RULES, cb, FN_NAME)
+                foo(REGEXP, ARRAY)
+                expect(cb.args[0][0]).to.be.deep.equal({
+                    fnName: FN_NAME,
+                    nth: 2
+                })
+            })
+        })
+
         describe('optional arguments validation', function () {
             describe('when last item of rules is a number `n` and given the previous rule', function () {
                 describe('the first `n` optional arguments passed, are verified with the last rule', function () {
@@ -330,7 +359,6 @@ describe('argumentsVerify', function () {
         describe('passing callback/error handler in context', function () {
             it('', function () {
                 var RULES = [['Number']]
-                var FN_NAME = 'foo'
                 var foo = fnTestCreator.call({
                     fnName: FN_NAME,
                     handler: cb
