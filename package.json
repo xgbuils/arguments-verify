@@ -1,6 +1,6 @@
 {
   "name": "arguments-verify",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "arguments verifier",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/xgbuils/arguments-verify#readme",
   "dependencies": {
-    "type-verify": "^0.4.1"
+    "type-verify": "^0.4.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
